@@ -3,13 +3,14 @@ import './App.css'
 
 // COMPONENTS
 import Grid from '@material-ui/core/Grid'
-
+import Compose from './Components/Compose/Compose'
 import Tweets from './Components/Tweets/Tweets'
 import Toolbar from './Components/Toolbar/Toolbar'
 
 // Material UI
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
+import TextareaAutosize from '@material-ui/core/TextareaAutosize'
 import { makeStyles } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('md')]: {
             display: 'none',
         },
+    },
+    makeTweetsContainer: {
+        background: '',
     },
 }))
 
@@ -38,107 +42,27 @@ function App() {
                 </Grid>
             </Grid>
 
-            <Grid item container direction="column" xs={6} alignItems="center">
-                <Grid item container sm={4} justify="flex-end"></Grid>
-                <Grid item sm={8}>
-                    <div>
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                        Nostrud reprehenderit labore sint velit exercitation
-                        officia et adipisicing. Eu voluptate minim dolor laboris
-                        consectetur sunt deserunt et excepteur mollit. Sit et
-                        reprehenderit dolore voluptate ipsum culpa Lorem amet
-                    </div>
+            <Grid
+                item
+                container
+                direction="column"
+                xs={6}
+                spacing={3}
+                alignItems="stretch"
+                style={{ height: '100%' }}
+            >
+                <Grid
+                    item
+                    container
+                    sm={12}
+                    direction="column"
+                    alignItems="stretch"
+                >
+                    <div>Hello There!</div>
+                    <Compose />
+                </Grid>
+                <Grid item sm={12}>
+                    BRUHHHHHHHHHHHHHHHH
                     {/* <Tweets /> */}
                 </Grid>
             </Grid>

@@ -39,14 +39,17 @@ function signInWithGoogle() {
 
 function getTweets() {
     let tweets
-    let query = db.collection('tweets')
-    let unsubscribe = query.onSnapshot((snapshot) => {
-        tweets = snapshot.docs.map((tweet) => tweet.data())
-    })
+    let data = db
+        .collection('tweets')
+        .get()
+        .then((querySnapshot) => {
+            const data = querySnapshot.docs.map((doc) => doc.data())
+            return data
+        })
 
-    return [unsubscribe, tweets]
+    return data
 }
 
 export default firebase
 
-export { signOut, signInWithGoogle, auth, register, login }
+export { signOut, signInWithGoogle, auth, register, login, getTweets }

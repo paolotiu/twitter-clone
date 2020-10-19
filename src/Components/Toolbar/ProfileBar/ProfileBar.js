@@ -26,7 +26,7 @@ export default function ProfileBar(props) {
                 onClick={() => setShow(!show)}
             >
                 <div className="bar-container">
-                    <Avatar src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?cs=srgb&dl=pexels-chevanon-photography-1108099.jpg&fm=jpg" />
+                    <Avatar src={loading ? null : user.photoURL} />
 
                     <div className="name-container">
                         <span>{loading ? null : user.displayName}</span>

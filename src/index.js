@@ -3,10 +3,27 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import Routes from './Router'
 import * as serviceWorker from './serviceWorker'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#1da1f2',
+        },
+        secondary: {
+            main: '#fffffff',
+        },
+        typography: {
+            fontFamily: 'Helvetica Nueu',
+        },
+    },
+})
 
 ReactDOM.render(
     <React.StrictMode>
-        <Routes />
+        <ThemeProvider theme={theme}>
+            <Routes />
+        </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')
 )

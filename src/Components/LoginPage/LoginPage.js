@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from 'react'
 
-import { signInWithGoogle, register, login } from '../../firebase/firebase'
+import { register, login } from '../../firebase/firebase'
 import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import FormControl from '@material-ui/core/FormControl'
-import TextField from '@material-ui/core/TextField'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Input from '@material-ui/core/Input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fab, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
-import VpnKey from '@material-ui/icons/VpnKey'
+import Button from '@material-ui/core/Button'
+
+import TextField from '@material-ui/core/TextField'
 
 const useStyles = makeStyles({
     container: {
-        position: 'absolute',
-        margin: 'auto',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        width: '400px',
-        height: '400px',
+        marginTop: '50px',
     },
     form: {
         display: 'flex',
         height: '100%',
+        width: '40%',
+        margin: 'auto',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
         alignItems: 'center',
@@ -37,11 +27,27 @@ const useStyles = makeStyles({
     },
     redirect: {
         textDecoration: 'underline',
-        color: 'lightblue',
+        color: '#1da1f2',
         cursor: 'pointer',
         '&:hover': {
             color: 'blue',
         },
+    },
+    submit: {
+        fontSize: '16px',
+        color: 'white',
+        background: '#1da1f2',
+        outline: 'none',
+        width: '100%',
+        fontWeight: 700,
+        borderRadius: '1000px',
+        height: '40px',
+        border: 'none',
+        margin: '10px 5px',
+    },
+    error: {
+        fontSize: '13px',
+        color: 'red',
     },
 })
 
@@ -52,6 +58,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
     const [disabled, setDisabled] = useState(true)
+    const [error, setError] = useState('')
     const classes = useStyles()
 
     useEffect(() => {
@@ -67,9 +74,13 @@ export default function LoginPage() {
                 .then((x) => {
                     console.log(x.user.displayName)
                 })
-                .catch(console.log)
+                .catch((e) => {
+                    setError(e.message)
+                })
         } else {
-            login(email, password)
+            login(email, password).catch((e) => {
+                setError(e.message)
+            })
         }
     }
 
@@ -77,18 +88,37 @@ export default function LoginPage() {
         <div className={classes.container}>
             {isNewUser ? (
                 <form className={classes.form} onSubmit={handleSubmit}>
-                    Sign In
+                    <FontAwesomeIcon
+                        icon={faTwitter}
+                        color="#1da1f2"
+                        size="2x"
+                    />
+                    <span
+                        style={{
+                            fontWeight: 700,
+                            fontSize: '20px',
+                            margin: '20px 0',
+                        }}
+                    >
+                        Create An Account
+                    </span>
                     <TextField
                         type="name"
                         label="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth={true}
                         required
                     />
                     <TextField
                         type="email"
                         label="Email Address"
                         value={email}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth={true}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
@@ -96,6 +126,9 @@ export default function LoginPage() {
                         type="password"
                         label="Password"
                         value={password}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth={true}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
@@ -103,29 +136,54 @@ export default function LoginPage() {
                         type="password"
                         label="Confirm Password"
                         value={confirm}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth={true}
                         onChange={(e) => setConfirm(e.target.value)}
                         required
                     />
-                    <Button type="submit" disabled={disabled}>
-                        Submit
-                    </Button>
+                    {error !== '' ? (
+                        <span className={classes.error}>{error} </span>
+                    ) : null}
+                    <button type="submit" className={classes.submit}>
+                        Signup
+                    </button>
                     <span className={classes.question}>
                         Already have an account?{' '}
                         <span
                             className={classes.redirect}
-                            onClick={() => setIsNewUser(false)}
+                            onClick={() => {
+                                setIsNewUser(false)
+                                setError('')
+                            }}
                         >
-                            Sign In
+                            Log In
                         </span>
                     </span>
                 </form>
             ) : (
                 <form className={classes.form} onSubmit={handleSubmit}>
-                    Sign Up
+                    <FontAwesomeIcon
+                        icon={faTwitter}
+                        color="#1da1f2"
+                        size="2x"
+                    />
+                    <span
+                        style={{
+                            fontWeight: 700,
+                            fontSize: '20px',
+                            margin: '20px 0',
+                        }}
+                    >
+                        Log In
+                    </span>
                     <TextField
+                        fullWidth={true}
                         type="email"
                         label="Email Address"
                         value={email}
+                        variant="outlined"
+                        margin="normal"
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
@@ -137,16 +195,25 @@ export default function LoginPage() {
                             setPassword(e.target.value)
                             setConfirm(e.target.value)
                         }}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth={true}
                         required
                     />
-                    <Button type="submit" disabled={disabled}>
-                        Submit
-                    </Button>
+                    {error !== '' ? (
+                        <span className={classes.error}> {error}</span>
+                    ) : null}
+                    <button type="submit" className={classes.submit}>
+                        Log In
+                    </button>
                     <span className={classes.question}>
                         Dont have an account?{' '}
                         <span
                             className={classes.redirect}
-                            onClick={() => setIsNewUser(true)}
+                            onClick={() => {
+                                setIsNewUser(true)
+                                setError('')
+                            }}
                         >
                             Sign Up
                         </span>
