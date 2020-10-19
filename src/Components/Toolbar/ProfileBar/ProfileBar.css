@@ -1,0 +1,41 @@
+.bar-container {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.bar-container:hover {
+    background: lightgray;
+}
+
+.name-container {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-right: 30px;
+}
+
+.dropup {
+    font-size: large;
+    background: white;
+    visibility: hidden;
+    height: 0;
+    width: 100%;
+    opacity: 0;
+    bottom: 70px;
+    border-radius: 10px;
+    padding: 5px 0;
+    position: absolute;
+    box-shadow: 1px 1px 5px lightgray, -1px -1px 5px lightgray;
+    transition: opacity 0.7s ease;
+}
+
+.show {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.7s ease;
+}
