@@ -1,14 +1,17 @@
-import React from 'react'
-import firebase from '../../firebase/firebase'
-import {useAuthState} from 'react-firebase-hooks/auth';
+import React, {useState, useEffect} from 'react'
+import StylesButton from '../Button/StylesButton';
 import Avatar from '@material-ui/core/Avatar'
-import InputBase from '@material-ui/core/InputBase'
-import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Slide from '@material-ui/core/Slide';
+
 import { makeStyles } from '@material-ui/core/styles'
 import {  useAuth} from '../../useAuth';
+import {makeTweet} from '../../firebase/firebase'
 const useStyles = makeStyles({
     composeContainer: {
-        display: 'flex'
+        display: 'flex',
     },
     textarea: {
         marginLeft: '10px',
@@ -19,27 +22,86 @@ const useStyles = makeStyles({
      form: {
          width: '100%',
          
+     },
+     writeTweet: {
+         display: 'flex',
+         alignItems: 'center'
+     },
+     SnackbarContent:{
+        background: 'transparent', outline: 'none', boxShadow: 'none', color: 'black'
      }
 })
+
+function SlideTransition(props) {
+    return <Slide {...props} direction="down" />;
+  }
+  
 
 export default function Compose() {
 
 
     const classes = useStyles()
+    const [disabled, setDisabled] = useState(true)
+    const [text, setText] = useState('')
     const {user, loading} = useAuth()
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        console.log('hey')
+        if(text !== ''){
+            setDisabled(false)
+        }else{
+            setDisabled(true)
+        }
+    }, [text])
+
+    function submitTweet(e){
+        e.preventDefault()
+        makeTweet(text)
+        setText('')
+        setOpen(true)
+    }
+
+    function closeSnackBar(){
+        setOpen(false)
+    }
     return (
         <div className={classes.composeContainer}>
+            
+        <form action="" className={classes.form} onSubmit={submitTweet}>
+            <section className={classes.writeTweet}>
+        
+        
             <Avatar src={loading ? null : user.photoURL} />
-        <form action="" className={classes.form}>
-        <textarea
-        className={classes.textarea}
-        placeholder="What's on your mind?"
-        cols={25}
+        <TextField
+          id="standard-textarea"
+          InputProps={{ disableUnderline: true }}
+          placeholder="Whats Happening?"
+          margin="none"
+          fullWidth={true}
+          style={{marginLeft: '10px'}}
+          multiline
+          value={text} onChange={(e) => setText(e.target.value)}
+        />
+            </section>
         
-        wrap="soft"
+      <StylesButton float={true}  style={{float: 'right'}} disabled={disabled}>Tweet</StylesButton>
+      <Snackbar 
+      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+      open={open}
+      TransitionComponent={SlideTransition}
+      autoHideDuration={2500}
         
-      />
-      <Button type="submit">Compose Tweet</Button>
+      onClose={closeSnackBar}
+      transitionDuration={{enter: 900, exit: 700}}
+     
+      >
+           <SnackbarContent
+            className={classes.SnackbarContent}
+          message={ "Tweet sent succesfully ✔"}
+        />
+      </Snackbar>
+      
         </form>
             
     

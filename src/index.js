@@ -15,6 +15,16 @@ const theme = createMuiTheme({
         },
         typography: {
             fontFamily: 'Helvetica Nueu',
+            button: {
+                letterSpacing: '1em',
+            },
+        },
+        overrides: {
+            containedPrimary: {
+                text: {
+                    color: 'white',
+                },
+            },
         },
     },
 })

@@ -39,6 +39,7 @@ export default function ProfileBar(props) {
                         fullWidth={true}
                         onClick={(e) => {
                             e.stopPropagation()
+                            console.log('hey')
                             signOut()
                         }}
                     >

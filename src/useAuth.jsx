@@ -17,9 +17,12 @@ function UserProvider({ children }) {
                     setLoading(false)
                 } else {
                 }
-            } 
+            } else{
+                setUser(user)
+                setLoading(false)
+            }
         })
-
+        
         return unsubscribe
     }, [])
 

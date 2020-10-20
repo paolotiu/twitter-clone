@@ -9,6 +9,13 @@ firebase.initializeApp(firebaseConfig)
 const auth = firebase.auth()
 const db = firebase.firestore()
 
+function getUserName() {
+    return firebase.auth().currentUser.displayName
+}
+
+function getProfilePicUrl() {
+    return firebase.auth().currentUser.photoURL
+}
 async function register(email, password, name) {
     return auth
         .createUserWithEmailAndPassword(email, password)
@@ -54,6 +61,24 @@ function getTweets() {
     return data
 }
 
+function makeTweet(text) {
+    return db.collection('tweets').add({
+        text: text,
+        name: getUserName(),
+        profilePicUrl: getProfilePicUrl(),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        likes: 0,
+    })
+}
+
 export default firebase
 
-export { signOut, signInWithGoogle, auth, register, login, getTweets }
+export {
+    signOut,
+    signInWithGoogle,
+    auth,
+    register,
+    login,
+    getTweets,
+    makeTweet,
+}

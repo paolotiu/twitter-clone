@@ -46,7 +46,7 @@ function App() {
                 item
                 container
                 direction="column"
-                xs={6}
+                xs={4}
                 spacing={3}
                 alignItems="stretch"
                 style={{ height: '100%' }}
@@ -59,6 +59,14 @@ function App() {
                     alignItems="stretch"
                 >
                     <div>Hello There!</div>
+                </Grid>
+                <Grid
+                    item
+                    container
+                    sm={12}
+                    direction="column"
+                    alignItems="stretch"
+                >
                     <Compose />
                 </Grid>
                 <Grid item sm={12}>

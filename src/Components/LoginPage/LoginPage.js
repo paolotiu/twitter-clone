@@ -62,8 +62,6 @@ export default function LoginPage() {
     const { emailSignUp } = useAuth()
     const classes = useStyles()
 
-    useEffect(() => {}, [password, confirm])
-
     function handleSubmit(e) {
         e.preventDefault()
         if (password === confirm && password !== '' && password.length >= 8) {

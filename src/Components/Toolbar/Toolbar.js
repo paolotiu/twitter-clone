@@ -8,23 +8,24 @@ export default function Toolbar() {
         <Grid
             container
             direction="column"
-            style={{ height: '100%', marginTop: '20px' }}
+            style={{
+                height: '100%',
+                marginTop: '20px',
+                paddingBottom: '20px',
+            }}
+            justify="space-between"
         >
-            <Grid item style={{ flex: '1' }} xs={10}>
-                <ul>
-                    <li>Home</li>
-                    <li>Search</li>
-                    <li>Home</li>
-                    <li>Search</li>
-                    <li>Home</li>
-                    <li>Search</li>
-                    <li>Home</li>
-                    <li>Search</li>
-                </ul>
-            </Grid>
-            <Grid item xs={1} style={{ maxWidth: '100%' }}>
-                <ProfileBar />
-            </Grid>
+            <ul>
+                <li>Home</li>
+                <li>Search</li>
+                <li>Home</li>
+                <li>Search</li>
+                <li>Home</li>
+                <li>Search</li>
+                <li>Home</li>
+                <li>Search</li>
+            </ul>
+            <ProfileBar />
         </Grid>
     )
 }

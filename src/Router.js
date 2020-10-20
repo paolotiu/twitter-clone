@@ -7,6 +7,7 @@ import { useAuth } from './useAuth'
 
 export default function Routes() {
     const { user, loading } = useAuth()
+
     return (
         <>
             {loading ? (
