@@ -4,7 +4,7 @@ import './index.css'
 import Routes from './Router'
 import * as serviceWorker from './serviceWorker'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-
+import { UserProvider } from './useAuth'
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -22,7 +22,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            <Routes />
+            <UserProvider>
+                <Routes />
+            </UserProvider>
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')

@@ -5,7 +5,7 @@ import Avatar from '@material-ui/core/Avatar'
 import InputBase from '@material-ui/core/InputBase'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
-
+import {  useAuth} from '../../useAuth';
 const useStyles = makeStyles({
     composeContainer: {
         display: 'flex'
@@ -26,7 +26,7 @@ export default function Compose() {
 
 
     const classes = useStyles()
-    const [user, loading, error] = useAuthState(firebase.auth())
+    const {user, loading} = useAuth()
     return (
         <div className={classes.composeContainer}>
             <Avatar src={loading ? null : user.photoURL} />
@@ -35,7 +35,7 @@ export default function Compose() {
         className={classes.textarea}
         placeholder="What's on your mind?"
         cols={25}
-        maxLength
+        
         wrap="soft"
         
       />

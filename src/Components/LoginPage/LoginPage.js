@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-
-import { register, login } from '../../firebase/firebase'
+import { useAuth } from '../../useAuth'
+import { login } from '../../firebase/firebase'
 import { makeStyles } from '@material-ui/core/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fab, faTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -59,28 +59,25 @@ export default function LoginPage() {
     const [confirm, setConfirm] = useState('')
     const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState('')
+    const { emailSignUp } = useAuth()
     const classes = useStyles()
 
-    useEffect(() => {
-        if (password === confirm && password !== '' && password.length >= 8) {
-            setDisabled(false)
-        }
-    }, [password, confirm])
+    useEffect(() => {}, [password, confirm])
 
     function handleSubmit(e) {
         e.preventDefault()
-        if (isNewUser) {
-            register(username, email, password)
-                .then((x) => {
-                    console.log(x.user.displayName)
-                })
-                .catch((e) => {
+        if (password === confirm && password !== '' && password.length >= 8) {
+            if (isNewUser) {
+                emailSignUp(email, password, username).catch((e) =>
+                    setError(e.message)
+                )
+            } else {
+                login(email, password).catch((e) => {
                     setError(e.message)
                 })
+            }
         } else {
-            login(email, password).catch((e) => {
-                setError(e.message)
-            })
+            setError('Passwords must be the same')
         }
     }
 

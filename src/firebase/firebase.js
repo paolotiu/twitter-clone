@@ -9,13 +9,17 @@ firebase.initializeApp(firebaseConfig)
 const auth = firebase.auth()
 const db = firebase.firestore()
 
-async function register(name, email, password) {
-    const newUser = await auth.createUserWithEmailAndPassword(email, password)
-    newUser.user.updateProfile({
-        displayName: name,
-    })
-
-    return newUser
+async function register(email, password, name) {
+    return auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+            console.log(result)
+            return result.user.updateProfile({
+                displayName: name,
+            })
+        })
+        .then(() => auth.currentUser)
+        .catch((e) => e)
 }
 
 function login(email, password) {

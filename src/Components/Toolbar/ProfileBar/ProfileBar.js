@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { signOut, auth } from '../../../firebase/firebase'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuth } from '../../../useAuth'
 import Avatar from '@material-ui/core/Avatar'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import Button from '@material-ui/core/Button'
@@ -10,7 +10,7 @@ import './ProfileBar.css'
 
 export default function ProfileBar(props) {
     const [show, setShow] = useState(false)
-    const [user, loading, error] = useAuthState(auth)
+    const { user, loading } = useAuth()
     const profile = useRef()
     useEffect(() => {
         if (show) {
