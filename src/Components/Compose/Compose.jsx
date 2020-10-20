@@ -47,7 +47,6 @@ export default function Compose() {
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        console.log('hey')
         if(text !== ''){
             setDisabled(false)
         }else{

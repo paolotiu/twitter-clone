@@ -6,6 +6,7 @@ import firebaseConfig from './config'
 
 const firebase = app
 firebase.initializeApp(firebaseConfig)
+const firestore = firebase.firestore
 const auth = firebase.auth()
 const db = firebase.firestore()
 
@@ -48,19 +49,6 @@ function signInWithGoogle() {
 
 // DB FUNCTIONS
 
-function getTweets() {
-    let tweets
-    let data = db
-        .collection('tweets')
-        .get()
-        .then((querySnapshot) => {
-            const data = querySnapshot.docs.map((doc) => doc.data())
-            return data
-        })
-
-    return data
-}
-
 function makeTweet(text) {
     return db.collection('tweets').add({
         text: text,
@@ -74,11 +62,12 @@ function makeTweet(text) {
 export default firebase
 
 export {
+    firestore,
+    db,
     signOut,
     signInWithGoogle,
     auth,
     register,
     login,
-    getTweets,
     makeTweet,
 }

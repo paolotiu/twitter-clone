@@ -70,8 +70,7 @@ function App() {
                     <Compose />
                 </Grid>
                 <Grid item sm={12}>
-                    BRUHHHHHHHHHHHHHHHH
-                    {/* <Tweets /> */}
+                    <Tweets />
                 </Grid>
             </Grid>
 

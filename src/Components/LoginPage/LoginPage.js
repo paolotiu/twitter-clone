@@ -3,9 +3,7 @@ import { useAuth } from '../../useAuth'
 import { login } from '../../firebase/firebase'
 import { makeStyles } from '@material-ui/core/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fab, faTwitter } from '@fortawesome/free-brands-svg-icons'
-
-import Button from '@material-ui/core/Button'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 import TextField from '@material-ui/core/TextField'
 

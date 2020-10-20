@@ -9,7 +9,9 @@ function UserProvider({ children }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        setLoading(true)
         const unsubscribe = auth.onAuthStateChanged((user) => {
+            setLoading(true)
             if (user) {
                 if (user.displayName) {
                     
