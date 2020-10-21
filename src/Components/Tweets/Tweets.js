@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Tweet from './Tweet/Tweet'
-import { db } from '../../firebase/firebase'
 
 import loadingPng from '../../static/loading.png'
-
+import { db } from '../../firebase/firebase'
+import { useAuth } from '../../useAuth'
 function findWithAttr(array, attr, value) {
     for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -12,15 +12,16 @@ function findWithAttr(array, attr, value) {
     }
     return -1
 }
-export default function Tweets() {
+export default function Tweets(props) {
     const [loading, setloading] = useState(true)
     const [tweets, setTweets] = useState([])
 
+    const { user } = useAuth()
+    const userDataRef = db.collection('users').doc(user.uid)
     useEffect(() => {
         db.collection('tweets')
             .orderBy('timestamp', 'asc')
             .onSnapshot((snapshot) => {
-                console.log('called')
                 snapshot.docChanges().forEach(function (change) {
                     let message = change.doc
                     console.log(change.type)
@@ -44,7 +45,7 @@ export default function Tweets() {
     return (
         <>
             {tweets.map((v, i) => {
-                return <Tweet data={v} key={i} />
+                return <Tweet data={v} key={i} userDataRef={userDataRef} />
             })}
         </>
     )

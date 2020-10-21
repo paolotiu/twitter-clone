@@ -26,7 +26,8 @@ async function register(email, password, name) {
             })
         })
         .then(() => {
-            db.collection('users').add({
+            db.collection('users').doc(auth.currentUser.uid).set({
+                displayName: auth.currentUser.displayName,
                 uid: auth.currentUser.uid,
                 likedTweets: [],
                 following: [],

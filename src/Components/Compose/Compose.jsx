@@ -37,7 +37,7 @@ function SlideTransition(props) {
   }
   
 
-export default function Compose() {
+export default function Compose(props) {
 
 
     const classes = useStyles()

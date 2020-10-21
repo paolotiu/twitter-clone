@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 
 // COMPONENTS
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles()
+
     return (
         <Grid
             container
