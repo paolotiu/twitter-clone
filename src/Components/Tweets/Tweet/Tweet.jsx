@@ -66,11 +66,15 @@ export default function Tweet({data, userDataRef}) {
                 let likedTweets = userData.likedTweets
                 
                 let res = likedTweets.indexOf(id)
-                console.log(res)
+                console.log(likedTweets, id, res)
                 
-                if(res !== -1){
+                if(res === -1){
+                    setLiked(false)
+                }else if(res !== -1){
                     setLiked(true)
                 }
+                
+                
             }
         })
      }, [id])
