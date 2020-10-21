@@ -28,15 +28,14 @@ function UserProvider({ children }) {
         return unsubscribe
     }, [])
 
-    async function emailSignUp(email, password, username) {
-        let returnVal;
-        await register(email, password, username).then((user) => {
-            
+    function emailSignUp(email, password, username) {
+    
+        return register(email, password, username).then((user) => {
             setUser(user)
             setLoading(false)
-            returnVal = user
-        }).catch(e => {returnVal = e})
-        return Promise.reject(returnVal)
+            return null
+        }).catch(e => e)
+        
     }
 
     const value = {

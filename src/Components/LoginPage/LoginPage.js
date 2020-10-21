@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../../useAuth'
 import { login } from '../../firebase/firebase'
 import { makeStyles } from '@material-ui/core/styles'
@@ -50,32 +50,50 @@ const useStyles = makeStyles({
 })
 
 export default function LoginPage() {
+    const _isMounted = useRef(false)
     const [isNewUser, setIsNewUser] = useState(true)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
-    const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState('')
     const { emailSignUp } = useAuth()
     const classes = useStyles()
 
     function handleSubmit(e) {
         e.preventDefault()
-        if (password === confirm && password !== '' && password.length >= 8) {
-            if (isNewUser) {
-                emailSignUp(email, password, username).catch((e) =>
-                    setError(e.message)
-                )
+
+        if (_isMounted) {
+            if (
+                password === confirm &&
+                password !== '' &&
+                password.length >= 8
+            ) {
+                if (isNewUser) {
+                    let res = emailSignUp(email, password, username)
+                    res.then((e) => {
+                        if (e) {
+                            setError(e.message)
+                        }
+                    })
+                } else {
+                    login(email, password).catch((e) => {
+                        setError(e.message)
+                    })
+                }
             } else {
-                login(email, password).catch((e) => {
-                    setError(e.message)
-                })
+                setError('Passwords must be the same')
             }
-        } else {
-            setError('Passwords must be the same')
         }
     }
+
+    useEffect(() => {
+        _isMounted.current = true
+        return () => {
+            // ComponentWillUnmount in Class Component
+            _isMounted.current = false
+        }
+    }, [])
 
     return (
         <div className={classes.container}>

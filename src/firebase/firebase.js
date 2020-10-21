@@ -21,13 +21,19 @@ async function register(email, password, name) {
     return auth
         .createUserWithEmailAndPassword(email, password)
         .then((result) => {
-            console.log(result)
             return result.user.updateProfile({
                 displayName: name,
             })
         })
-        .then(() => auth.currentUser)
-        .catch((e) => e)
+        .then(() => {
+            db.collection('users').add({
+                uid: auth.currentUser.uid,
+                likedTweets: [],
+                following: [],
+            })
+            return auth.currentUser
+        })
+        .catch((e) => Promise.reject(e))
 }
 
 function login(email, password) {

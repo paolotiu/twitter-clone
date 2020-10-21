@@ -1,15 +1,13 @@
 import React from 'react'
 import App from './App'
 import LoginPage from './Components/LoginPage/LoginPage'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import firebase from './firebase/firebase'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useAuth } from './useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 export default function Routes() {
     const { user, loading } = useAuth()
-
     return (
         <>
             {loading ? (
