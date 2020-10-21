@@ -23,12 +23,20 @@ const useStyles = makeStyles((theme) => ({
     makeTweetsContainer: {
         background: '',
     },
+    border: {
+        border: '1px solid gray',
+    },
 }))
 
 function App() {
     const classes = useStyles()
     return (
-        <Grid container spacing={0} direction="row" alignItems="stretch">
+        <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="stretch"
+        >
             <Grid
                 item
                 container
@@ -36,6 +44,7 @@ function App() {
                 justify="flex-end"
                 direction="row"
                 alignItems="stretch"
+                styke={{ height: '100vh' }}
             >
                 <Grid item sm={7} style={{ position: 'fixed', height: '100%' }}>
                     <Toolbar />
@@ -49,6 +58,7 @@ function App() {
                 xs={4}
                 spacing={3}
                 alignItems="stretch"
+                className={classes.border}
                 style={{ height: '100%' }}
             >
                 <Grid
@@ -69,7 +79,7 @@ function App() {
                 >
                     <Compose />
                 </Grid>
-                <Grid item sm={12}>
+                <Grid item sm={12} style={{ padding: 0 }}>
                     <Tweets />
                 </Grid>
             </Grid>
