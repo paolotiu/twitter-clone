@@ -1,4 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tweetir - a twitter clone
+
+---
+
+## To start run `npm start`
+
+### This project was made using
+
+-   HTML5
+-   CSS
+-   Material UI
+-   Javascript
+-   ReactJS
+-   React Router
+-   Firebase (firestore, storage, and auth)
+
+### Features implemented
+
+-   Authentication using firebase auth
+-   CRUD operations usign firebase firestore (ex. Reading a tweet, Creating a tweet, Liking a tweet, Updating user photo)
+-   Responsive UI
+
+<!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -65,4 +87,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 ### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify -->

@@ -5,12 +5,15 @@ import {makeStyles} from '@material-ui/core/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as outlinedHeart } from '@fortawesome/free-regular-svg-icons';
+import TimeAgo from 'javascript-time-ago'
+import ReactTimeAgo from 'react-time-ago'
+import en from 'javascript-time-ago/locale/en'
 const useStyles= makeStyles((theme) => ({
     TweetContainer: {
         padding: '10px',
         display: 'flex',
         flexDirection: 'row',
-        borderTop: '1px solid grey',
+        borderTop: '1px solid #eceff2',
         
     },
     main: {
@@ -35,9 +38,14 @@ const useStyles= makeStyles((theme) => ({
     },
     text: {
         wordBreak: 'break-all'
+    },
+    time: {
+        marginLeft: '10px',
+        fontSize: '12px'
     }
     
 }))
+TimeAgo.addDefaultLocale(en)
 export default function Tweet({data, userDataRef}) {
     const id = data.id
     const classes = useStyles()
@@ -45,7 +53,6 @@ export default function Tweet({data, userDataRef}) {
     const {text, profilePicUrl, name, likes, timestamp} = data.data()
     
      function likeTweet() {
-        console.log(liked)
          if(liked === false){
             data.ref.update({likes: likes + 1})
          userDataRef.update({likedTweets: firebase.firestore.FieldValue.arrayUnion(id)})
@@ -66,7 +73,6 @@ export default function Tweet({data, userDataRef}) {
                 let likedTweets = userData.likedTweets
                 
                 let res = likedTweets.indexOf(id)
-                console.log(likedTweets, id, res)
                 
                 if(res === -1){
                     setLiked(false)
@@ -89,7 +95,9 @@ export default function Tweet({data, userDataRef}) {
         
         
             <span className={classes.headerName}>{name}</span>
-            <span className={classes.date}> {timestamp ? timestamp.toDate().toDateString() : null}</span>
+                <span className={classes.time}>
+                {timestamp ? <ReactTimeAgo  date={timestamp.toDate()} locale="en-US" timeStyle="round" /> : null}
+                    </span>
             </section>
             
             <p className={classes.text}>{text}</p>

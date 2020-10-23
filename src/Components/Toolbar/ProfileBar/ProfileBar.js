@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { signOut, auth } from '../../../firebase/firebase'
+import { signOut, changePicUrl } from '../../../firebase/firebase'
 import { useAuth } from '../../../useAuth'
 import Avatar from '@material-ui/core/Avatar'
 import ButtonBase from '@material-ui/core/ButtonBase'
@@ -39,11 +39,31 @@ export default function ProfileBar(props) {
                         fullWidth={true}
                         onClick={(e) => {
                             e.stopPropagation()
-                            console.log('hey')
                             signOut()
                         }}
                     >
                         Sign Out
+                    </Button>
+                    <Button
+                        fullWidth={true}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            document.querySelector('#file').click()
+                        }}
+                    >
+                        <input
+                            type="file"
+                            name="file"
+                            id="file"
+                            style={{ position: 'fixed', top: '-100em' }}
+                            onChange={(e) => {
+                                const file = e.target.files[0]
+                                console.log(file instanceof Blob)
+                                changePicUrl(file)
+                            }}
+                            accept="image/*"
+                        />
+                        Change Photo
                     </Button>
                 </div>
             </div>

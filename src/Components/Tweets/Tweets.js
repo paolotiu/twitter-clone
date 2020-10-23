@@ -19,12 +19,12 @@ export default function Tweets(props) {
     const { user } = useAuth()
     const userDataRef = db.collection('users').doc(user.uid)
     useEffect(() => {
-        db.collection('tweets')
+        const unsubscribe = db
+            .collection('tweets')
             .orderBy('timestamp', 'asc')
             .onSnapshot((snapshot) => {
                 snapshot.docChanges().forEach(function (change) {
                     let message = change.doc
-                    console.log(change.type)
                     if (change.type === 'added') {
                         setTweets((tweets) => [message, ...tweets])
                     } else if (change.type === 'modified') {
@@ -39,7 +39,9 @@ export default function Tweets(props) {
             })
 
         setloading(false)
-        return () => {}
+        return () => {
+            unsubscribe()
+        }
     }, [])
 
     return (
@@ -47,6 +49,7 @@ export default function Tweets(props) {
             {tweets.map((v, i) => {
                 return <Tweet data={v} key={i} userDataRef={userDataRef} />
             })}
+            <div style={{ height: '50px' }}></div>
         </>
     )
 }

@@ -1,6 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 import firebaseConfig from './config'
 
@@ -54,6 +55,49 @@ function signInWithGoogle() {
     return auth.signInWithPopup(provider)
 }
 
+function changePicUrl(pic) {
+    const user = auth.currentUser
+    if (pic) {
+        document.querySelector('#loading-handler').click()
+        const storageRef = firebase.storage().ref()
+        storageRef
+            .child('images/' + user.uid)
+            .put(pic)
+            .then((fileSnapshot) => {
+                // Get photo url
+                return fileSnapshot.ref.getDownloadURL().then((url) => {
+                    // update user photo
+
+                    db.collection('tweets')
+                        .where('userUid', '==', auth.currentUser.uid)
+                        .get()
+                        .then((snapshot) => {
+                            console.log(snapshot)
+                            snapshot.forEach((doc) => {
+                                db.collection('tweets')
+                                    .doc(doc.id)
+                                    .update({ profilePicUrl: url })
+                            })
+                        })
+
+                    return user.updateProfile({
+                        photoURL: url,
+                    })
+                })
+            })
+            .then(() => {
+                document.querySelector('#loading-handler').click()
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+
+        // auth.currentUser.updateProfile({
+        //     photoURL: pic,
+        // })
+    }
+}
+
 // DB FUNCTIONS
 
 function makeTweet(text) {
@@ -63,6 +107,7 @@ function makeTweet(text) {
         profilePicUrl: getProfilePicUrl(),
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         likes: 0,
+        userUid: auth.currentUser.uid,
     })
 }
 
@@ -77,4 +122,5 @@ export {
     register,
     login,
     makeTweet,
+    changePicUrl,
 }
